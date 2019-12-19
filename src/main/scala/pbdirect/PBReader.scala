@@ -11,13 +11,44 @@ import enumeratum.values.{IntEnum, IntEnumEntry}
 
 import scala.util.Try
 
-trait PBReader[A] {
-  def read(input: CodedInputStream): A
+trait PBMessageReader[A] {
+  def read(bytes: Array[Byte]): A
+}
+
+object PBMessageReader {
+
+  def instance[A](f: Array[Byte] => A): PBMessageReader[A] =
+    new PBMessageReader[A] {
+      override def read(bytes: Array[Byte]): A = f(bytes)
+    }
+
+  object collectFieldIndices extends Poly1 {
+    implicit def annotatedCase[N <: Nat] = at[(Some[pbIndex], N)] {
+      case (Some(annotation), _) => FieldIndex(annotation.first :: annotation.more.toList)
+    }
+    implicit def unannotatedCase[N <: Nat](implicit toInt: ToInt[N]) = at[(None.type, N)] {
+      case (None, n) => FieldIndex(List(toInt() + 1))
+    }
+  }
+
+  implicit def prodReader[A, R <: HList, Anns <: HList, ZWI <: HList, I <: HList](
+      implicit
+      gen: Generic.Aux[A, R],
+      annotations: Annotations.Aux[pbIndex, A, Anns],
+      zwi: ZipWithIndex.Aux[Anns, ZWI],
+      indices: Mapper.Aux[collectFieldIndices.type, ZWI, I],
+      reader: Lazy[PBProductReader[R, I]]): PBMessageReader[A] = instance { (bytes: Array[Byte]) =>
+    val fieldIndices = annotations.apply.zipWithIndex.map(collectFieldIndices)
+    //val bytes        = input.readByteArray()
+    gen.from(reader.value.read(fieldIndices, bytes))
+  }
+
 }
 
 trait PBProductReader[R <: HList, I <: HList] {
   def read(indices: I, bytes: Array[Byte]): R
 }
+
 object PBProductReader {
   def instance[R <: HList, I <: HList](f: (I, Array[Byte]) => R): PBProductReader[R, I] =
     new PBProductReader[R, I] {
@@ -35,6 +66,11 @@ object PBProductReader {
       headParser.parse(indices.head.values.head, bytes) :: tail.value.read(indices.tail, bytes)
     }
 
+}
+
+// TODO rename to PBFieldReader (PBScalarReader? PBValueReader?)
+trait PBReader[A] {
+  def read(input: CodedInputStream): A
 }
 
 trait LowerPriorityPBReaderImplicits {
@@ -56,30 +92,16 @@ trait LowerPriorityPBReaderImplicits {
 
     gen.from(repr.value.parse(1, out.toByteArray))
   }
+
+  implicit def embeddedMessageReader[A](implicit reader: PBMessageReader[A]): PBReader[A] =
+    instance { (input: CodedInputStream) =>
+      val bytes = input.readByteArray()
+      reader.read(bytes)
+    }
+
 }
 
 trait PBReaderImplicits extends LowerPriorityPBReaderImplicits {
-
-  object collectFieldIndices extends Poly1 {
-    implicit def annotatedCase[N <: Nat] = at[(Some[pbIndex], N)] {
-      case (Some(annotation), _) => FieldIndex(annotation.first :: annotation.more.toList)
-    }
-    implicit def unannotatedCase[N <: Nat](implicit toInt: ToInt[N]) = at[(None.type, N)] {
-      case (None, n) => FieldIndex(List(toInt() + 1))
-    }
-  }
-
-  implicit def prodReader[A, R <: HList, Anns <: HList, ZWI <: HList, I <: HList](
-      implicit
-      gen: Generic.Aux[A, R],
-      annotations: Annotations.Aux[pbIndex, A, Anns],
-      zwi: ZipWithIndex.Aux[Anns, ZWI],
-      indices: Mapper.Aux[collectFieldIndices.type, ZWI, I],
-      reader: Lazy[PBProductReader[R, I]]): PBReader[A] = instance { (input: CodedInputStream) =>
-    val fieldIndices = annotations.apply.zipWithIndex.map(collectFieldIndices)
-    val bytes        = input.readByteArray()
-    gen.from(reader.value.read(fieldIndices, bytes))
-  }
 
   implicit def enumReader[A](
       implicit
@@ -102,14 +124,18 @@ trait PBReaderImplicits extends LowerPriorityPBReaderImplicits {
     enum.withValue(reader.read(input))
   }
   implicit def keyValuePairReader[K, V](
-      implicit keyParser: PBParser[K],
-      valueParser: PBParser[V]): PBReader[(K, V)] = instance { (input: CodedInputStream) =>
+      implicit keyReader: PBReader[K],
+      valueReader: PBReader[V]): PBReader[(K, V)] = instance { (input: CodedInputStream) =>
     val bytes = input.readByteArray()
-    val key   = keyParser.parse(1, bytes)
-    val value = valueParser.parse(2, bytes)
+    val in    = CodedInputStream.newInstance(bytes)
+    in.readTag()
+    val key = keyReader.read(in)
+    in.readTag()
+    val value = valueReader.read(in)
     (key, value)
   }
 }
+
 object PBReader extends PBReaderImplicits {
   implicit object BooleanReader$ extends PBReader[Boolean] {
     override def read(input: CodedInputStream): Boolean = input.readBool()
@@ -149,6 +175,7 @@ object PBReader extends PBReaderImplicits {
         f(reader.read(input))
     }
   }
+
 }
 
 trait PBParser[A] {
