@@ -57,8 +57,6 @@ trait PBScalarValueReaderImplicits extends PBScalarValueReaderImplicits_1 {
     override def read(input: CodedInputStream): Array[Byte] = input.readByteArray()
   }
 
-  def apply[A: PBScalarValueReader]: PBScalarValueReader[A] = implicitly
-
   implicit object FunctorReader extends Functor[PBScalarValueReader] {
     override def map[A, B](reader: PBScalarValueReader[A])(f: A => B): PBScalarValueReader[B] =
       instance { (input: CodedInputStream) =>
@@ -106,4 +104,6 @@ trait PBScalarValueReaderImplicits extends PBScalarValueReaderImplicits_1 {
 
 }
 
-object PBScalarValueReader extends PBScalarValueReaderImplicits
+object PBScalarValueReader extends PBScalarValueReaderImplicits {
+  def apply[A: PBScalarValueReader]: PBScalarValueReader[A] = implicitly
+}

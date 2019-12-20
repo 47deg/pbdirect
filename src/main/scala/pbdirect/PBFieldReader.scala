@@ -67,4 +67,6 @@ trait PBFieldReaderImplicits {
 
 }
 
-object PBFieldReader extends PBFieldReaderImplicits
+object PBFieldReader extends PBFieldReaderImplicits {
+  def apply[A: PBFieldReader]: PBFieldReader[A] = implicitly
+}

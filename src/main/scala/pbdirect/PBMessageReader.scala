@@ -10,7 +10,7 @@ trait PBMessageReader[A] {
   def read(bytes: Array[Byte]): A
 }
 
-object PBMessageReader {
+trait PBMessageReaderImplicits {
 
   def instance[A](f: Array[Byte] => A): PBMessageReader[A] =
     new PBMessageReader[A] {
@@ -60,4 +60,8 @@ object PBMessageReader {
     gen.from(repr.value.read(bytes))
   }
 
+}
+
+object PBMessageReader extends PBMessageReaderImplicits {
+  def apply[A: PBMessageReader]: PBMessageReader[A] = implicitly
 }

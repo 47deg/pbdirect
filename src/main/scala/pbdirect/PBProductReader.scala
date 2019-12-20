@@ -6,7 +6,7 @@ trait PBProductReader[R <: HList, I <: HList] {
   def read(indices: I, bytes: Array[Byte]): R
 }
 
-object PBProductReader {
+trait PBProductReaderImplicits {
 
   def instance[R <: HList, I <: HList](f: (I, Array[Byte]) => R): PBProductReader[R, I] =
     new PBProductReader[R, I] {
@@ -26,4 +26,8 @@ object PBProductReader {
       headFieldReader.read(indices.head.values.head, bytes) :: tail.value.read(indices.tail, bytes)
     }
 
+}
+
+object PBProductReader extends PBProductReaderImplicits {
+  def apply[R <: HList, I <: HList](implicit reader: PBProductReader[R, I]) = reader
 }
