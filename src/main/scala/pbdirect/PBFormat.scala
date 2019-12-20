@@ -23,6 +23,7 @@ object PBFormat extends PBFormatImplicits {
     new PBFormat[A] {
       override def read(input: CodedInputStream): A = reader.read(input)
       override def wireType: Int                    = writer.wireType
+      override def isDefault(value: A): Boolean     = writer.isDefault(value)
       override def writeWithoutTag(value: A, out: CodedOutputStream): Unit =
         writer.writeWithoutTag(value, out)
     }
