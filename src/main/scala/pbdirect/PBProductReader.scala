@@ -23,7 +23,7 @@ object PBProductReader {
       headFieldReader: PBFieldReader[H],
       tail: Lazy[PBProductReader[T, IT]]): PBProductReader[H :: T, FieldIndex :: IT] =
     PBProductReader.instance { (indices: FieldIndex :: IT, bytes: Array[Byte]) =>
-      headFieldReader.parse(indices.head.values.head, bytes) :: tail.value.read(indices.tail, bytes)
+      headFieldReader.read(indices.head.values.head, bytes) :: tail.value.read(indices.tail, bytes)
     }
 
 }

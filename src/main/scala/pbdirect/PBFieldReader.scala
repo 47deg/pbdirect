@@ -3,12 +3,12 @@ package pbdirect
 import com.google.protobuf.CodedInputStream
 
 trait PBFieldReader[A] {
-  def parse(index: Int, bytes: Array[Byte]): A
+  def read(index: Int, bytes: Array[Byte]): A
 }
 
 trait PBFieldReaderImplicits {
   def instance[A](f: (Int, Array[Byte]) => A): PBFieldReader[A] = new PBFieldReader[A] {
-    override def parse(index: Int, bytes: Array[Byte]): A = f(index, bytes)
+    override def read(index: Int, bytes: Array[Byte]): A = f(index, bytes)
   }
 
   implicit def repeatedFieldReader[A](
@@ -43,26 +43,26 @@ trait PBFieldReaderImplicits {
     }
 
   implicit def optionalFieldReader[A](
-      implicit parser: PBFieldReader[List[A]]): PBFieldReader[Option[A]] =
+      implicit reader: PBFieldReader[List[A]]): PBFieldReader[Option[A]] =
     instance { (index: Int, bytes: Array[Byte]) =>
-      parser.parse(index, bytes).lastOption
+      reader.read(index, bytes).lastOption
     }
 
   implicit def mapFieldReader[K, V](
-      implicit parser: PBFieldReader[List[(K, V)]]): PBFieldReader[Map[K, V]] =
+      implicit reader: PBFieldReader[List[(K, V)]]): PBFieldReader[Map[K, V]] =
     instance { (index: Int, bytes: Array[Byte]) =>
-      parser.parse(index, bytes).toMap
+      reader.read(index, bytes).toMap
     }
 
   implicit def collectionMapFieldReader[K, V](
-      implicit parser: PBFieldReader[List[(K, V)]]): PBFieldReader[collection.Map[K, V]] =
+      implicit reader: PBFieldReader[List[(K, V)]]): PBFieldReader[collection.Map[K, V]] =
     instance { (index: Int, bytes: Array[Byte]) =>
-      parser.parse(index, bytes).toMap
+      reader.read(index, bytes).toMap
     }
 
-  implicit def seqFieldReader[A](implicit parser: PBFieldReader[List[A]]): PBFieldReader[Seq[A]] =
+  implicit def seqFieldReader[A](implicit reader: PBFieldReader[List[A]]): PBFieldReader[Seq[A]] =
     instance { (index: Int, bytes: Array[Byte]) =>
-      parser.parse(index, bytes)
+      reader.read(index, bytes)
     }
 
 }
