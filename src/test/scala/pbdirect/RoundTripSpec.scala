@@ -20,7 +20,10 @@ class RoundTripSpec extends AnyFlatSpec with Checkers {
     PropertyCheckConfiguration(minSuccessful = 500)
 
   "round trip to protobuf and back" should "be an identity" in check {
-    pending // because handling of missing values when reading is not implemented yet
+    // TODO the test is failing because e.g. Some(false) gets turned into None.
+    // Need to decide what the correct behaviour is and adjust either the test
+    // or the implementation.
+    pending
 
     forAllNoShrink { (message: MessageThree) =>
       val roundtripped = message.toPB.pbTo[MessageThree]
