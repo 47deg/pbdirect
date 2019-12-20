@@ -159,7 +159,8 @@ class PBReaderSpec extends AnyWordSpecLike with Matchers {
     "derive new instance using map" in {
       import java.time.Instant
       import cats.syntax.functor._
-      implicit val instantReader: PBReader[Instant] = PBReader[Long].map(Instant.ofEpochMilli)
+      implicit val instantReader: PBScalarValueReader[Instant] =
+        PBScalarValueReader[Long].map(Instant.ofEpochMilli)
       case class Message(@pbIndex(1) instant: Instant)
       val instant = Instant.ofEpochMilli(1499411227777L)
       Array[Byte](8, -127, -55, -2, -34, -47, 43).pbTo[Message] shouldBe Message(instant)
