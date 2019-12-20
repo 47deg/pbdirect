@@ -34,7 +34,6 @@ trait PBMessageReaderImplicits {
       indices: Mapper.Aux[collectFieldIndices.type, ZWI, I],
       reader: Lazy[PBProductReader[R, I]]): PBMessageReader[A] = instance { (bytes: Array[Byte]) =>
     val fieldIndices = annotations.apply.zipWithIndex.map(collectFieldIndices)
-    //val bytes        = input.readByteArray()
     gen.from(reader.value.read(fieldIndices, bytes))
   }
 
