@@ -43,6 +43,28 @@ object PBMessageReader {
     gen.from(reader.value.read(fieldIndices, bytes))
   }
 
+  implicit val cnilReader: PBMessageReader[CNil] = instance { (bytes: Array[Byte]) =>
+    throw new UnsupportedOperationException("Can't read CNil")
+  }
+
+  implicit def cconsReader[H, T <: Coproduct](
+      implicit
+      head: PBMessageReader[H],
+      tail: Lazy[PBMessageReader[T]]): PBMessageReader[H :+: T] = instance { (bytes: Array[Byte]) =>
+    Try {
+      Inl(head.read(bytes))
+    } getOrElse {
+      Inr(tail.value.read(bytes))
+    }
+  }
+
+  implicit def coprodReader[A, R <: Coproduct](
+      implicit
+      gen: Generic.Aux[A, R],
+      repr: Lazy[PBMessageReader[R]]): PBMessageReader[A] = instance { (bytes: Array[Byte]) =>
+    gen.from(repr.value.read(bytes))
+  }
+
 }
 
 trait PBProductReader[R <: HList, I <: HList] {
@@ -78,20 +100,6 @@ trait LowerPriorityPBReaderImplicits {
     new PBReader[A] {
       override def read(input: CodedInputStream): A = f(input)
     }
-  implicit def coprodReader[A, R <: Coproduct](
-      implicit
-      gen: Generic.Aux[A, R],
-      repr: Lazy[PBParser[R]]): PBReader[A] = instance { (input: CodedInputStream) =>
-    val bytes = input.readByteArray()
-
-    // wraps the bytes into a protobuf single field message
-    val out   = new ByteArrayOutputStream()
-    val pbOut = CodedOutputStream.newInstance(out)
-    pbOut.writeByteArray(1, bytes)
-    pbOut.flush()
-
-    gen.from(repr.value.parse(1, out.toByteArray))
-  }
 
   implicit def embeddedMessageReader[A](implicit reader: PBMessageReader[A]): PBReader[A] =
     instance { (input: CodedInputStream) =>
@@ -187,19 +195,19 @@ trait LowPriorityPBParserImplicits {
     override def parse(index: Int, bytes: Array[Byte]): A = f(index, bytes)
   }
 
-  implicit val cnilParser: PBParser[CNil] = instance { (index: Int, bytes: Array[Byte]) =>
-    throw new UnsupportedOperationException("Can't read CNil")
-  }
-  implicit def cconsParser[H, T <: Coproduct](
-      implicit
-      head: PBParser[H],
-      tail: Lazy[PBParser[T]]): PBParser[H :+: T] = instance { (index: Int, bytes: Array[Byte]) =>
-    Try {
-      Inl(head.parse(index, bytes))
-    } getOrElse {
-      Inr(tail.value.parse(index, bytes))
-    }
-  }
+  //implicit val cnilParser: PBParser[CNil] = instance { (index: Int, bytes: Array[Byte]) =>
+  //throw new UnsupportedOperationException("Can't read CNil")
+  //}
+  //implicit def cconsParser[H, T <: Coproduct](
+  //implicit
+  //head: PBParser[H],
+  //tail: Lazy[PBParser[T]]): PBParser[H :+: T] = instance { (index: Int, bytes: Array[Byte]) =>
+  //Try {
+  //Inl(head.parse(index, bytes))
+  //} getOrElse {
+  //Inr(tail.value.parse(index, bytes))
+  //}
+  //}
 }
 
 trait PBParserImplicits extends LowPriorityPBParserImplicits {
