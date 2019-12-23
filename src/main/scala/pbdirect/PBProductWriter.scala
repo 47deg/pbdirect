@@ -28,6 +28,16 @@ trait PBProductWriterImplicits {
       tail.value.writeTo(indexedValues.tail, out)
     }
 
+  implicit def consOneofWriter[H <: Coproduct, T <: HList](
+      implicit head: PBOneofFieldWriter[H],
+      tail: Lazy[PBProductWriter[T]]): PBProductWriter[(FieldIndex, H) :: T] =
+    instance { (indexedValues: (FieldIndex, H) :: T, out: CodedOutputStream) =>
+      val headIndices = indexedValues.head._1.values
+      val headValue   = indexedValues.head._2
+      head.writeTo(headIndices, headValue, out)
+      tail.value.writeTo(indexedValues.tail, out)
+    }
+
 }
 
 object PBProductWriter extends PBProductWriterImplicits {
