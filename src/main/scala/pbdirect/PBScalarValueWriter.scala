@@ -145,8 +145,9 @@ trait PBScalarValueWriterImplicits extends LowPriorityPBScalarValueWriterImplici
       implicit keyWriter: PBScalarValueWriter[K],
       valueWriter: PBScalarValueWriter[V]): PBScalarValueWriter[(K, V)] =
     new PBScalarValueWriter[(K, V)] {
-      override def wireType: Int                    = WIRETYPE_LENGTH_DELIMITED
-      override def isDefault(pair: (K, V)): Boolean = false
+      override def wireType: Int = WIRETYPE_LENGTH_DELIMITED
+      override def isDefault(pair: (K, V)): Boolean =
+        keyWriter.isDefault(pair._1) && valueWriter.isDefault(pair._2)
       override def writeWithoutTag(pair: (K, V), out: CodedOutputStream): Unit = {
         val buffer    = new ByteArrayOutputStream()
         val bufferOut = CodedOutputStream.newInstance(buffer)
