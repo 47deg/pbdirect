@@ -9,6 +9,13 @@ import enumeratum.values.IntEnum
 import shapeless._
 import shapeless.ops.hlist._
 
+sealed abstract class Status(val value: Int) extends IntEnumEntry
+object Status extends IntEnum[Status] {
+  case object Running extends Status(0)
+  case object Stopped extends Status(5)
+  val values = findValues
+}
+
 class RoundTripSpec extends AnyFlatSpec with Checkers {
   import RoundTripSpec._
 
@@ -36,13 +43,6 @@ class RoundTripSpec extends AnyFlatSpec with Checkers {
 }
 
 object RoundTripSpec {
-
-  sealed abstract class Status(val value: Int) extends IntEnumEntry
-  object Status extends IntEnum[Status] {
-    case object Running extends Status(0)
-    case object Stopped extends Status(5)
-    val values = findValues
-  }
 
   case class EmptyMessage()
 
@@ -152,8 +152,8 @@ trait PBEquivalenceImplicits_1 extends PBEquivalenceImplicits_2 {
   implicit val stringOption: PBEquivalence[Option[String]] = option("stringOption", "")
   implicit val bytesOption: PBEquivalence[Option[Array[Byte]]] =
     option("bytesOption", Array.empty[Byte])
-  implicit val enumOption: PBEquivalence[Option[RoundTripSpec.Status]] =
-    option("enumOption", RoundTripSpec.Status.withValue(0))
+  implicit val enumOption: PBEquivalence[Option[Status]] =
+    option("enumOption", Status.withValue(0))
 
   object fieldEquivalence extends Poly2 {
     implicit def defaultCase[A](implicit equiv: PBEquivalence[A]): Case.Aux[A, A, Boolean] =
