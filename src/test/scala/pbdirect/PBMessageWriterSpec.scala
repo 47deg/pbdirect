@@ -103,5 +103,14 @@ class PBMessageWriterSpec extends AnyWordSpecLike with Matchers {
       val message = CoproductMessage(5, "Hello".inject[Cop])
       message.toPB shouldBe Array[Byte](8, 5, 42, 5, 72, 101, 108, 108, 111)
     }
+    "write a oneof field even if it has the default value" in {
+      type Cop = Int :+: String :+: Boolean :+: CNil
+      case class CoproductMessage(
+          @pbIndex(1) a: Int,
+          @pbIndex(3, 5, 7) b: Cop
+      )
+      val message = CoproductMessage(5, "".inject[Cop])
+      message.toPB shouldBe Array[Byte](8, 5, 42, 0)
+    }
   }
 }

@@ -25,7 +25,7 @@ trait PBOneofFieldWriterImplicits {
       tailWriter: Lazy[PBOneofFieldWriter[T]]): PBOneofFieldWriter[H :+: T] =
     instance { (indices: List[Int], value: H :+: T, out: CodedOutputStream) =>
       value match {
-        case Inl(h) => headWriter.writeTo(indices.head, h, out)
+        case Inl(h) => headWriter.writeTo(indices.head, h, out, skipDefaultValue = false)
         case Inr(t) => tailWriter.value.writeTo(indices.tail, t, out)
       }
     }

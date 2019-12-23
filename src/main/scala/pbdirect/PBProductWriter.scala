@@ -24,7 +24,7 @@ trait PBProductWriterImplicits {
     instance { (indexedValues: (FieldIndex, H) :: T, out: CodedOutputStream) =>
       val headIndex = indexedValues.head._1.values.head
       val headValue = indexedValues.head._2
-      head.writeTo(headIndex, headValue, out)
+      head.writeTo(headIndex, headValue, out, skipDefaultValue = true)
       tail.value.writeTo(indexedValues.tail, out)
     }
 
