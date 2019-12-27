@@ -186,7 +186,7 @@ The following table gives some examples of how pbdirect decodes missing fields:
 | Scala type | Value given to missing field |
 | --- | --- |
 | `Int`/`Short`/`Byte`/`Long` | `0` |
-| `Double`/Float` | `0.0` |
+| `Double`/`Float` | `0.0` |
 | `String` | `""` |
 | `Array[Byte]` | empty array |
 | `List[_]` | empty list |
