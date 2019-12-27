@@ -98,22 +98,22 @@ class PBMessageWriterSpec extends AnyWordSpecLike with Matchers {
     type Cop = Int :+: String :+: Boolean :+: CNil
     case class CoproductMessage(
         @pbIndex(1) a: Int,
-        @pbIndex(3, 5, 7) b: Cop
+        @pbIndex(3, 5, 7) b: Option[Cop]
     )
     "write a properly annotated message with a Coproduct field (1st branch)" in {
-      val message = CoproductMessage(5, 9.inject[Cop])
+      val message = CoproductMessage(5, Some(9.inject[Cop]))
       message.toPB shouldBe Array[Byte](8, 5, 24, 9)
     }
     "write a properly annotated message with a Coproduct field (2nd branch)" in {
-      val message = CoproductMessage(5, "Hello".inject[Cop])
+      val message = CoproductMessage(5, Some("Hello".inject[Cop]))
       message.toPB shouldBe Array[Byte](8, 5, 42, 5, 72, 101, 108, 108, 111)
     }
     "write a properly annotated message with a Coproduct field (3rd branch)" in {
-      val message = CoproductMessage(5, true.inject[Cop])
+      val message = CoproductMessage(5, Some(true.inject[Cop]))
       message.toPB shouldBe Array[Byte](8, 5, 56, 1)
     }
     "write a oneof field even if it has the default value" in {
-      val message = CoproductMessage(5, "".inject[Cop])
+      val message = CoproductMessage(5, Some("".inject[Cop]))
       message.toPB shouldBe Array[Byte](8, 5, 42, 0)
     }
   }

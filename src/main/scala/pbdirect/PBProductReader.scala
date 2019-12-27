@@ -29,7 +29,7 @@ trait PBProductReaderImplicits {
   implicit def consOneofProductReader[H <: Coproduct, T <: HList, IT <: HList](
       implicit
       head: PBOneofFieldReader[H],
-      tail: Lazy[PBProductReader[T, IT]]): PBProductReader[H :: T, FieldIndex :: IT] =
+      tail: Lazy[PBProductReader[T, IT]]): PBProductReader[Option[H] :: T, FieldIndex :: IT] =
     PBProductReader.instance { (indices: FieldIndex :: IT, bytes: Array[Byte]) =>
       head.read(indices.head.values, bytes) :: tail.value.read(indices.tail, bytes)
     }

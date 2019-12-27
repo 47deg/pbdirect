@@ -81,23 +81,32 @@ class PBMessageReaderSpec extends AnyWordSpecLike with Matchers {
     type Cop = Int :+: String :+: Boolean :+: CNil
     case class CoproductMessage(
         @pbIndex(1) a: Int,
-        @pbIndex(3, 5, 7) b: Cop
+        @pbIndex(3, 5, 7) b: Option[Cop]
     )
     "read a properly annotated message with a Coproduct field (1st branch)" in {
       val bytes = Array[Byte](8, 5, 24, 9)
-      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, 9.inject[Cop])
+      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, Some(9.inject[Cop]))
     }
     "read a properly annotated message with a Coproduct field (2nd branch)" in {
       val bytes = Array[Byte](8, 5, 42, 5, 72, 101, 108, 108, 111)
-      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, "Hello".inject[Cop])
+      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, Some("Hello".inject[Cop]))
     }
     "read a properly annotated message with a Coproduct field (3rd branch)" in {
       val bytes = Array[Byte](8, 5, 56, 1)
-      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, true.inject[Cop])
+      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, Some(true.inject[Cop]))
+    }
+    "read a properly annotated message with a Coproduct field (field is missing)" in {
+      val bytes = Array[Byte](8, 5)
+      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, None)
     }
     "read a oneof field with the default value" in {
       val bytes = Array[Byte](8, 5, 42, 0)
-      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, "".inject[Cop])
+      bytes.pbTo[CoproductMessage] shouldBe CoproductMessage(5, Some("".inject[Cop]))
+    }
+    "read a message with an embedded message containing a oneof field" in {
+      case class WrapperMessage(@pbIndex(3) embedded: CoproductMessage)
+      val bytes = Array[Byte](26, 4, 8, 5, 42, 0)
+      bytes.pbTo[WrapperMessage] shouldBe WrapperMessage(CoproductMessage(5, Some("".inject[Cop])))
     }
   }
 }
