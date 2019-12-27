@@ -125,7 +125,7 @@ implicit val instantFormat: PBFormat[Instant] =
   PBFormat[Long].imap(Instant.ofEpochMilli)(_.toEpochMilli)
 ```
 
-If you only need a reader you can map over an existing `PBReader`
+If you only need a reader you can map over an existing `PBScalarValueReader`
 
 ```scala
 import java.time.Instant
