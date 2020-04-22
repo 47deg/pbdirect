@@ -1,6 +1,6 @@
 package pbdirect
 
-import shapeless.{:+:, CNil, Coproduct, Generic, Witness}
+import shapeless.{:+:, CNil, Coproduct, Witness}
 
 object Enum {
   def values[T](implicit v: Values[T], ord: Ordering[T]): Seq[T]         = v.apply.sorted
@@ -13,8 +13,7 @@ object Enum {
 
   object Values {
     implicit def values[A, Repr <: Coproduct](
-        implicit gen: Generic.Aux[A, Repr],
-        v: Aux[A, Repr]
+        implicit v: Aux[A, Repr]
     ): Values[A] =
       new Values[A] { def apply = v.values }
 
