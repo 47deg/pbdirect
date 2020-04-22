@@ -36,7 +36,6 @@ object ProjectPlugin extends AutoPlugin {
       // disable license headers on source files because it's too complicated, owing to us forking the project
       headerLicense := Some(HeaderLicense.Custom("")),
       headerMappings := headerMappings.value + (HeaderFileType.scala -> HeaderCommentStyle.cppStyleLineComment),
-      startYear := Some(2019),
       crossScalaVersions := Seq(scalaVersion.value, V.scala213),
       libraryDependencies ++= Seq(
         "com.chuusai"                %% "shapeless"                 % V.shapeless,
