@@ -119,6 +119,7 @@ E.g. to add a format to write `java.time.Instant` you can do:
 
 ```scala mdoc
 import java.time.Instant
+import cats.implicits._
 
 implicit val instantFormat: PBFormat[Instant] =
   PBFormat[Long].imap(Instant.ofEpochMilli(_))(_.toEpochMilli)
@@ -137,7 +138,6 @@ And for a writer you simply contramap over it:
 
 ```scala mdoc
 import java.time.Instant
-import cats.syntax.contravariant._
 
 implicit val instantWriter: PBScalarValueWriter[Instant] =
   PBScalarValueWriter[Long].contramap(_.toEpochMilli)
