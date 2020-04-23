@@ -9,7 +9,6 @@ lazy val pbdirect = project
   .settings(name := "pbdirect")
 
 lazy val `project-docs` = (project in file(".docs"))
-  .aggregate(pbdirect)
   .dependsOn(pbdirect)
   .settings(moduleName := "pbdirect-project-docs")
   .settings(mdocIn := file(".docs"))
