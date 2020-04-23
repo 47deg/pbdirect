@@ -47,6 +47,7 @@ object ProjectPlugin extends AutoPlugin {
         "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless % Test,
         "com.github.os72"            % "protoc-jar"                 % V.protocJar % Test
       ),
+      Compile / scalacOptions -= "-Xfatal-warnings",
       Compile / console / scalacOptions -= "-Xlint"
     )
 }

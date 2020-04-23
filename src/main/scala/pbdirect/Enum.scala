@@ -1,6 +1,6 @@
 package pbdirect
 
-import shapeless.{:+:, CNil, Coproduct, Witness}
+import shapeless.{:+:, CNil, Coproduct, Generic, Witness}
 
 object Enum {
   def values[T](implicit v: Values[T], ord: Ordering[T]): Seq[T]         = v.apply.sorted
@@ -13,7 +13,12 @@ object Enum {
 
   object Values {
     implicit def values[A, Repr <: Coproduct](
-        implicit v: Aux[A, Repr]
+        /*
+         * scalac will (correctly) warn you that this parameter is never used,
+         * but don't delete it! It's required to avoid diverging implicit expansion.
+         */
+        implicit gen: Generic.Aux[A, Repr],
+        v: Aux[A, Repr]
     ): Values[A] =
       new Values[A] { def apply = v.values }
 
