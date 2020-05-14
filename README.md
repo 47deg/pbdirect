@@ -163,7 +163,7 @@ import cats.implicits._
 
 implicit val instantFormat: PBFormat[Instant] =
   PBFormat[Long].imap(Instant.ofEpochMilli(_))(_.toEpochMilli)
-// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@39639875
+// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@20054bb
 ```
 
 If you only need a reader you can map over an existing `PBScalarValueReader`
@@ -173,7 +173,7 @@ import java.time.Instant
 
 implicit val instantReader: PBScalarValueReader[Instant] =
   PBScalarValueReader[Long].map(Instant.ofEpochMilli(_))
-// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@4e29fdeb
+// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@2077930a
 ```
 
 And for a writer you simply contramap over it:
@@ -183,7 +183,7 @@ import java.time.Instant
 
 implicit val instantWriter: PBScalarValueWriter[Instant] =
   PBScalarValueWriter[Long].contramap(_.toEpochMilli)
-// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@70e50492
+// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@3eaaea3b
 ```
 
 ## Oneof fields
