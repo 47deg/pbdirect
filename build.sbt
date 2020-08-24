@@ -18,7 +18,7 @@ lazy val pbdirect = project
       "org.typelevel"              %% "cats-core"                 % "2.1.1",
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5"   % Test,
       "com.github.os72"             % "protoc-jar"                % "3.11.4"  % Test,
-      "org.scalatest"              %% "scalatest"                 % "3.2.1"   % Test,
+      "org.scalatest"              %% "scalatest"                 % "3.2.2"   % Test,
       "org.scalatestplus"          %% "scalacheck-1-14"           % "3.2.1.0" % Test
     )
   )
