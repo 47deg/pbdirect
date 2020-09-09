@@ -233,15 +233,14 @@ trait PBEquivalenceImplicits_1 extends PBEquivalenceImplicits_2 {
       fieldEquivs: ZipWith.Aux[R, R, fieldEquivalence.type, FEs],
       fold: LeftFolder.Aux[FEs, Boolean, conj.type, Boolean]
   ): PBEquivalence[A] =
-    instance("message") {
-      case (a1, a2) =>
-        val hlist1   = gen.to(a1)
-        val hlist2   = gen.to(a2)
-        val booleans = hlist1.zipWith(hlist2)(fieldEquivalence) // fieldEquivs.apply(hlist1, hlist2)
-        val result   = booleans.foldLeft(true)(conj)
-        if (!result)
-          println(booleans)
-        result
+    instance("message") { case (a1, a2) =>
+      val hlist1   = gen.to(a1)
+      val hlist2   = gen.to(a2)
+      val booleans = hlist1.zipWith(hlist2)(fieldEquivalence) // fieldEquivs.apply(hlist1, hlist2)
+      val result   = booleans.foldLeft(true)(conj)
+      if (!result)
+        println(booleans)
+      result
     }
 
 }
