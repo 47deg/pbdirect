@@ -57,12 +57,12 @@ trait PBMessageReaderImplicits {
 
   object collectFieldIndices extends Poly1 {
     implicit def annotatedCase[N <: Nat] =
-      at[(Some[pbIndex], N)] {
-        case (Some(annotation), _) => FieldIndex(annotation.first :: annotation.more.toList)
+      at[(Some[pbIndex], N)] { case (Some(annotation), _) =>
+        FieldIndex(annotation.first :: annotation.more.toList)
       }
     implicit def unannotatedCase[N <: Nat](implicit toInt: ToInt[N]) =
-      at[(None.type, N)] {
-        case (None, _) => FieldIndex(List(toInt() + 1))
+      at[(None.type, N)] { case (None, _) =>
+        FieldIndex(List(toInt() + 1))
       }
   }
 

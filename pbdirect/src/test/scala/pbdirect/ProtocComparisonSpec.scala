@@ -236,9 +236,8 @@ object ProtocComparisonSpec {
 
     def stringStringMap(map: Map[String, String]): String = {
       map
-        .map {
-          case (key, value) =>
-            s"""|stringStringMap: {
+        .map { case (key, value) =>
+          s"""|stringStringMap: {
                 |  key: ${string(key)}
                 |  value: ${string(value)}
                 |}""".stripMargin
@@ -248,9 +247,8 @@ object ProtocComparisonSpec {
 
     def intMessageTwoMap(map: Map[Int, MessageTwo]): String = {
       map
-        .map {
-          case (key, value) =>
-            s"""|intMessageTwoMap: {
+        .map { case (key, value) =>
+          s"""|intMessageTwoMap: {
                 |  key: ${key}
                 |  value: {
                 |${indent(indent(messageTwo(value)))}
@@ -262,9 +260,8 @@ object ProtocComparisonSpec {
 
     def signedIntFixedLongMap(map: Map[Int @@ Signed, Long @@ Fixed]): String = {
       map
-        .map {
-          case (key, value) =>
-            s"""|signedIntFixedLongMap: {
+        .map { case (key, value) =>
+          s"""|signedIntFixedLongMap: {
                 |  key: ${key}
                 |  value: ${value.toString}
                 |}""".stripMargin
