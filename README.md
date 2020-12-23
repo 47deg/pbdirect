@@ -16,7 +16,7 @@ PBDirect aims just that: Make it easier to serialize/deserialize into Protobuf.
 In order to use PBDirect you need to add the following lines to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.47deg" %% "pbdirect" % "0.5.2"
+libraryDependencies += "com.47deg" %% "pbdirect" % "0.6.0"
 ```
 
 ## Dependencies
@@ -89,7 +89,11 @@ val message = MyMessage2(
   text = Some("Hello"),
   numbers = List(1, 2, 3, 4)
 )
-// message: MyMessage2 = MyMessage2(Some(123), Some("Hello"), List(1, 2, 3, 4))
+// message: MyMessage2 = MyMessage2(
+//   id = Some(value = 123),
+//   text = Some(value = "Hello"),
+//   numbers = List(1, 2, 3, 4)
+// )
 val bytes = message.toPB
 // bytes: Array[Byte] = Array(
 //   8,
@@ -138,9 +142,9 @@ val bytes2: Array[Byte] = Array[Byte](8, 123, 26, 5, 72, 101, 108, 108, 111, 40,
 // )
 val message2 = bytes2.pbTo[MyMessage2]
 // message2: MyMessage2 = MyMessage2(
-//   Some(123),
-//   None,
-//   List(72, 101, 108, 108, 111)
+//   id = Some(value = 123),
+//   text = None,
+//   numbers = List(72, 101, 108, 108, 111)
 // )
 ```
 
@@ -155,7 +159,7 @@ import cats.implicits._
 
 implicit val instantFormat: PBFormat[Instant] =
   PBFormat[Long].imap(Instant.ofEpochMilli(_))(_.toEpochMilli)
-// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@35bd462e
+// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@61d2154e
 ```
 
 If you only need a reader you can map over an existing `PBScalarValueReader`
@@ -165,7 +169,7 @@ import java.time.Instant
 
 implicit val instantReader: PBScalarValueReader[Instant] =
   PBScalarValueReader[Long].map(Instant.ofEpochMilli(_))
-// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@6826c0ae
+// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@5e3dbcae
 ```
 
 And for a writer you simply contramap over it:
@@ -175,7 +179,7 @@ import java.time.Instant
 
 implicit val instantWriter: PBScalarValueWriter[Instant] =
   PBScalarValueWriter[Long].contramap(_.toEpochMilli)
-// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@5a18f022
+// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@29583131
 ```
 
 ## Oneof fields
