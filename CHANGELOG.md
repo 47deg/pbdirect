@@ -1,5 +1,35 @@
 # Changelog
 
+## [v0.6.1](https://github.com/47degrees/pbdirect/tree/v0.6.1) (2021-03-17)
+
+[Full Changelog](https://github.com/47degrees/pbdirect/compare/v0.6.0...v0.6.1)
+
+📈 **Dependency updates**
+
+- Update sbt-tpolecat to 0.1.17 [\#263](https://github.com/47degrees/pbdirect/pull/263) ([47erbot](https://github.com/47erbot))
+- Update sbt-github-header, sbt-github-mdoc to 0.9.2 [\#262](https://github.com/47degrees/pbdirect/pull/262) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.6 [\#261](https://github.com/47degrees/pbdirect/pull/261) ([47erbot](https://github.com/47erbot))
+- Update sbt-ci-release to 1.5.6 [\#260](https://github.com/47degrees/pbdirect/pull/260) ([47erbot](https://github.com/47erbot))
+- Update sbt to 1.4.9 [\#259](https://github.com/47degrees/pbdirect/pull/259) ([47erbot](https://github.com/47erbot))
+- Update scalatest to 3.2.6 [\#258](https://github.com/47degrees/pbdirect/pull/258) ([47erbot](https://github.com/47erbot))
+- Update sbt to 1.4.8 [\#257](https://github.com/47degrees/pbdirect/pull/257) ([47erbot](https://github.com/47erbot))
+- Update sbt-github-header, sbt-github-mdoc to 0.9.1 [\#256](https://github.com/47degrees/pbdirect/pull/256) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.5 [\#255](https://github.com/47degrees/pbdirect/pull/255) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.3 [\#254](https://github.com/47degrees/pbdirect/pull/254) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.2 [\#253](https://github.com/47degrees/pbdirect/pull/253) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.1 [\#251](https://github.com/47degrees/pbdirect/pull/251) ([47erbot](https://github.com/47erbot))
+- Update cats-core to 2.4.2 [\#250](https://github.com/47degrees/pbdirect/pull/250) ([47erbot](https://github.com/47erbot))
+- Update scalatest to 3.2.4 [\#249](https://github.com/47degrees/pbdirect/pull/249) ([47erbot](https://github.com/47erbot))
+- Update protobuf-java to 3.15.0 [\#247](https://github.com/47degrees/pbdirect/pull/247) ([47erbot](https://github.com/47erbot))
+- Update cats-core to 2.4.1 [\#246](https://github.com/47degrees/pbdirect/pull/246) ([47erbot](https://github.com/47erbot))
+- Update cats-core to 2.4.0 [\#245](https://github.com/47degrees/pbdirect/pull/245) ([47erbot](https://github.com/47erbot))
+- Update sbt to 1.4.7 [\#243](https://github.com/47degrees/pbdirect/pull/243) ([47erbot](https://github.com/47erbot))
+- Update sbt to 1.4.6 [\#241](https://github.com/47degrees/pbdirect/pull/241) ([47erbot](https://github.com/47erbot))
+
+**Merged pull requests:**
+
+- Fix Project Docs [\#240](https://github.com/47degrees/pbdirect/pull/240) ([juanpedromoreno](https://github.com/juanpedromoreno))
+
 ## [v0.6.0](https://github.com/47degrees/pbdirect/tree/v0.6.0) (2020-12-21)
 
 [Full Changelog](https://github.com/47degrees/pbdirect/compare/v0.5.2...v0.6.0)
@@ -94,7 +124,6 @@
 - Update sbt-org-policies to 0.13.3 [\#65](https://github.com/47degrees/pbdirect/pull/65) ([scala-steward](https://github.com/scala-steward))
 - Mergify: configuration update [\#64](https://github.com/47degrees/pbdirect/pull/64) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Update sbt-org-policies to 0.13.2 [\#63](https://github.com/47degrees/pbdirect/pull/63) ([scala-steward](https://github.com/scala-steward))
-- Release 0.5.1 [\#62](https://github.com/47degrees/pbdirect/pull/62) ([franciscodr](https://github.com/franciscodr))
 
 ## [v0.5.1](https://github.com/47degrees/pbdirect/tree/v0.5.1) (2020-03-13)
 
@@ -102,6 +131,7 @@
 
 **Merged pull requests:**
 
+- Release 0.5.1 [\#62](https://github.com/47degrees/pbdirect/pull/62) ([franciscodr](https://github.com/franciscodr))
 - Migrates from 47deg to 47degrees GH organization [\#61](https://github.com/47degrees/pbdirect/pull/61) ([franciscodr](https://github.com/franciscodr))
 - Update protoc-jar to 3.11.4 [\#60](https://github.com/47degrees/pbdirect/pull/60) ([scala-steward](https://github.com/scala-steward))
 - Update scalacheck-shapeless\_1.14 to 1.2.5 [\#59](https://github.com/47degrees/pbdirect/pull/59) ([scala-steward](https://github.com/scala-steward))

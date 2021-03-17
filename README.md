@@ -16,7 +16,7 @@ PBDirect aims just that: Make it easier to serialize/deserialize into Protobuf.
 In order to use PBDirect you need to add the following lines to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.47deg" %% "pbdirect" % "0.6.0"
+libraryDependencies += "com.47deg" %% "pbdirect" % "0.6.1"
 ```
 
 ## Dependencies
@@ -159,7 +159,7 @@ import cats.implicits._
 
 implicit val instantFormat: PBFormat[Instant] =
   PBFormat[Long].imap(Instant.ofEpochMilli(_))(_.toEpochMilli)
-// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@61d2154e
+// instantFormat: PBFormat[Instant] = pbdirect.PBFormat$$anon$1@3d93c5a8
 ```
 
 If you only need a reader you can map over an existing `PBScalarValueReader`
@@ -169,7 +169,7 @@ import java.time.Instant
 
 implicit val instantReader: PBScalarValueReader[Instant] =
   PBScalarValueReader[Long].map(Instant.ofEpochMilli(_))
-// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@5e3dbcae
+// instantReader: PBScalarValueReader[Instant] = pbdirect.PBScalarValueReaderImplicits$FunctorReader$$anon$2@66c424c2
 ```
 
 And for a writer you simply contramap over it:
@@ -179,7 +179,7 @@ import java.time.Instant
 
 implicit val instantWriter: PBScalarValueWriter[Instant] =
   PBScalarValueWriter[Long].contramap(_.toEpochMilli)
-// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@29583131
+// instantWriter: PBScalarValueWriter[Instant] = pbdirect.PBScalarValueWriterImplicits$ContravariantWriter$$anon$2@56bb0fa5
 ```
 
 ## Oneof fields
@@ -336,12 +336,5 @@ case class AnotherIntsMessage(
 # Copyright
 
 pbdirect is designed and developed by 47 Degrees
-Copyright (c) 2019-2020 47 Degrees.  All rights reserved.
 
-Copyright (c) 2017 Beyond the lines
-
-This project was started in 2017 by Beyond the lines and forked in 2019 by 47
-Degrees. Copyright for everything created before the fork belongs to Beyond the
-lines. Copyright for any changes since the fork belongs to 47 Degrees.
-
-Licensed under MIT. See [LICENSE](LICENSE) for terms.
+Copyright (C) 2019-2020 47 Degrees. <http://47deg.com>

@@ -8,26 +8,28 @@
 
 The maintainers of the project are:
 
-- [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
-- [![alejandrohdezma](https://avatars0.githubusercontent.com/u/9027541?v=4&s=20) **Alejandro Hernández (alejandrohdezma)**](https://github.com/alejandrohdezma)
-- [![BenFradet](https://avatars2.githubusercontent.com/u/1737211?v=4&s=20) **Ben Fradet (BenFradet)**](https://github.com/BenFradet)
-- [![cb372](https://avatars1.githubusercontent.com/u/106760?v=4&s=20) **Chris Birchall (cb372)**](https://github.com/cb372)
-- [![fedefernandez](https://avatars0.githubusercontent.com/u/720923?v=4&s=20) **Fede Fernández (fedefernandez)**](https://github.com/fedefernandez)
-- [![franciscodr](https://avatars1.githubusercontent.com/u/1200151?v=4&s=20) **Francisco Diaz (franciscodr)**](https://github.com/franciscodr)
-- [![juanpedromoreno](https://avatars2.githubusercontent.com/u/4879373?v=4&s=20) **Juan Pedro Moreno (juanpedromoreno)**](https://github.com/juanpedromoreno)
+- [![47erbot](https://avatars.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
+- [![alejandrohdezma](https://avatars.githubusercontent.com/u/9027541?v=4&s=20) **Alejandro Hernández (alejandrohdezma)**](https://github.com/alejandrohdezma)
+- [![BenFradet](https://avatars.githubusercontent.com/u/1737211?v=4&s=20) **Ben Fradet (BenFradet)**](https://github.com/BenFradet)
+- [![cb372](https://avatars.githubusercontent.com/u/106760?v=4&s=20) **Chris Birchall (cb372)**](https://github.com/cb372)
+- [![fedefernandez](https://avatars.githubusercontent.com/u/720923?v=4&s=20) **Fede Fernández (fedefernandez)**](https://github.com/fedefernandez)
+- [![franciscodr](https://avatars.githubusercontent.com/u/1200151?v=4&s=20) **Francisco Diaz (franciscodr)**](https://github.com/franciscodr)
+- [![juanpedromoreno](https://avatars.githubusercontent.com/u/4879373?v=4&s=20) **Juan Pedro Moreno (juanpedromoreno)**](https://github.com/juanpedromoreno)
+- [![sloshy](https://avatars.githubusercontent.com/u/427237?v=4&s=20) **Ryan Peters (sloshy)**](https://github.com/sloshy)
 
 ## Contributors
 
 These are the people that have contributed to the _pbdirect_ project:
 
-- [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
-- [![cb372](https://avatars1.githubusercontent.com/u/106760?v=4&s=20) **cb372**](https://github.com/cb372)
-- [![btlines](https://avatars2.githubusercontent.com/u/25171883?v=4&s=20) **btlines**](https://github.com/btlines)
-- [![juanpedromoreno](https://avatars2.githubusercontent.com/u/4879373?v=4&s=20) **juanpedromoreno**](https://github.com/juanpedromoreno)
-- [![alejandrohdezma](https://avatars0.githubusercontent.com/u/9027541?v=4&s=20) **alejandrohdezma**](https://github.com/alejandrohdezma)
-- [![BenFradet](https://avatars2.githubusercontent.com/u/1737211?v=4&s=20) **BenFradet**](https://github.com/BenFradet)
-- [![franciscodr](https://avatars1.githubusercontent.com/u/1200151?v=4&s=20) **franciscodr**](https://github.com/franciscodr)
-- [![xuwei-k](https://avatars0.githubusercontent.com/u/389787?v=4&s=20) **xuwei-k**](https://github.com/xuwei-k)
-- [![fedefernandez](https://avatars0.githubusercontent.com/u/720923?v=4&s=20) **fedefernandez**](https://github.com/fedefernandez)
-- [![akara](https://avatars3.githubusercontent.com/u/77111?v=4&s=20) **akara**](https://github.com/akara)
-- [![eperinan](https://avatars3.githubusercontent.com/u/3660921?v=4&s=20) **eperinan**](https://github.com/eperinan)
+- [![47erbot](https://avatars.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
+- [![cb372](https://avatars.githubusercontent.com/u/106760?v=4&s=20) **cb372**](https://github.com/cb372)
+- [![btlines](https://avatars.githubusercontent.com/u/25171883?v=4&s=20) **btlines**](https://github.com/btlines)
+- [![juanpedromoreno](https://avatars.githubusercontent.com/u/4879373?v=4&s=20) **juanpedromoreno**](https://github.com/juanpedromoreno)
+- [![alejandrohdezma](https://avatars.githubusercontent.com/u/9027541?v=4&s=20) **alejandrohdezma**](https://github.com/alejandrohdezma)
+- [![BenFradet](https://avatars.githubusercontent.com/u/1737211?v=4&s=20) **BenFradet**](https://github.com/BenFradet)
+- [![franciscodr](https://avatars.githubusercontent.com/u/1200151?v=4&s=20) **franciscodr**](https://github.com/franciscodr)
+- [![xuwei-k](https://avatars.githubusercontent.com/u/389787?v=4&s=20) **xuwei-k**](https://github.com/xuwei-k)
+- [![sloshy](https://avatars.githubusercontent.com/u/427237?v=4&s=20) **sloshy**](https://github.com/sloshy)
+- [![fedefernandez](https://avatars.githubusercontent.com/u/720923?v=4&s=20) **fedefernandez**](https://github.com/fedefernandez)
+- [![akara](https://avatars.githubusercontent.com/u/77111?v=4&s=20) **akara**](https://github.com/akara)
+- [![eperinan](https://avatars.githubusercontent.com/u/3660921?v=4&s=20) **eperinan**](https://github.com/eperinan)
