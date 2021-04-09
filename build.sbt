@@ -14,7 +14,7 @@ lazy val pbdirect = project
     libraryDependencies ++= Seq(
       "com.beachape"               %% "enumeratum"                % "1.6.1",
       "com.chuusai"                %% "shapeless"                 % "2.3.3",
-      "com.google.protobuf"         % "protobuf-java"             % "3.15.7",
+      "com.google.protobuf"         % "protobuf-java"             % "3.15.8",
       "org.typelevel"              %% "cats-core"                 % "2.5.0",
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5"   % Test,
       "com.github.os72"             % "protoc-jar"                % "3.11.4"  % Test,
