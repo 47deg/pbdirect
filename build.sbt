@@ -12,7 +12,7 @@ lazy val pbdirect = project
   .settings(Compile / scalacOptions -= "-Xfatal-warnings")
   .settings(
     libraryDependencies ++= Seq(
-      "com.beachape"               %% "enumeratum"                % "1.6.1",
+      "com.beachape"               %% "enumeratum"                % "1.7.0",
       "com.chuusai"                %% "shapeless"                 % "2.3.7",
       "com.google.protobuf"         % "protobuf-java"             % "3.17.3",
       "org.typelevel"              %% "cats-core"                 % "2.6.1",
