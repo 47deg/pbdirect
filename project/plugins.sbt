@@ -1,5 +1,5 @@
-addSbtPlugin("com.alejandrohdezma"       % "sbt-github-header"        % "0.9.2")
-addSbtPlugin("com.alejandrohdezma"       % "sbt-github-mdoc"          % "0.9.2")
+addSbtPlugin("com.alejandrohdezma"       % "sbt-github-header"        % "0.9.3")
+addSbtPlugin("com.alejandrohdezma"       % "sbt-github-mdoc"          % "0.9.3")
 addSbtPlugin("com.alejandrohdezma"       % "sbt-remove-test-from-pom" % "0.1.0")
 addSbtPlugin("com.alejandrohdezma"       % "sbt-codecov"              % "0.2.1")
 addSbtPlugin("com.geirsson"              % "sbt-ci-release"           % "1.5.7")
